@@ -1,8 +1,44 @@
 from django.shortcuts import render
-import requests 
-from bs4 import BeautifulSoup
+from django.views.generic.list import ListView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+from .models import Task
 
-def home(request):
+# import requests 
+# from bs4 import BeautifulSoup
+
+class TaskList(ListView):
+    model = Task
+    context_object_name = 'tasks'
+    template_name = 'main/tasks.html'
+
+class TaskDetail(DetailView):
+    model = Task
+    context_object_name = 'details'
+    template_name = 'main/details.html'
+
+class TaskCreate(CreateView):
+    model = Task
+    fields = '__all__'
+    success_url = reverse_lazy('tasks')
+    context_object_name = 'create'
+    template_name = 'main/create.html'
+    
+class TaskUpdate(UpdateView):
+    model = Task
+    fields = '__all__'
+    success_url = reverse_lazy('tasks')
+    context_object_name = 'update'
+    template_name = 'main/update.html'
+
+class TaskDelete(DeleteView):
+    model = Task
+    success_url = reverse_lazy('tasks')
+    context_object_name = 'delete'
+    template_name = 'main/delete.html'
+
+""" def home(request):
     city = "Santa Rosa"
     
     # url and requests 
@@ -28,3 +64,4 @@ def home(request):
     print(data)
 
     return render(request, 'main/home.html', data)
+ """
