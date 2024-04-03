@@ -1,8 +1,14 @@
-<h3>Create Task</h3>
-<a href="{% url 'tasks' %}">Home</a>
+{% extends 'main/base.html' %}
+{% block content %}
 
-<form method="POST" action="">
+<div class="header-bar">
+    <a href="{% url 'tasks' %}">&#8592;Back</a>
+</div>
+
+<form class="card-body" method="POST" action="">
     {% csrf_token %}
     {{form.as_p}}
-    <input type="submit" value="Apply">
+    <input class="button" type="submit" value="Apply">
 </form>
+
+{% endblock content %}
